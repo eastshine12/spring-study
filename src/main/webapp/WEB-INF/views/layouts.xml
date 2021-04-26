@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<tiles-definitions>
+	<definition name="login.tiles" template="/WEB-INF/views/login/login.jsp">
+	</definition>
+	<definition name="regi.tiles" template="/WEB-INF/views/login/regi.jsp">
+	</definition>
+	
+	
+	<!-- bbs -->
+	<definition name="bbslist.tiles" template="/WEB-INF/views/layouts-tiles.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/commons/header.jsp"/>
+		<put-attribute name="top_inc" value="/WEB-INF/views/commons/top_inc.jsp"/>
+		<put-attribute name="top_menu" value="/WEB-INF/views/commons/top_menu.jsp"/>
+		<put-attribute name="left_menu" value="/WEB-INF/views/bbs/left_bbsmenu.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/bbs/bbslist.jsp"/>
+		<put-attribute name="bottom_inc" value="/WEB-INF/views/commons/bottom_inc.jsp"/>
+	</definition>
+	
+	<definition name="bbswrite.tiles" extends="bbslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/bbs/bbswrite.jsp"/>
+	</definition>
+	
+	<definition name="bbsDetail.tiles" extends="bbslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/bbs/bbsDetail.jsp"/>
+	</definition>
+	
+	<definition name="bbsUpdate.tiles" extends="bbslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/bbs/bbsUpdate.jsp"/>
+	</definition>
+	
+	<definition name="answer.tiles" extends="bbslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/bbs/answer.jsp"/>
+	</definition>
+	
+	
+	<!-- calendar -->
+	<definition name="callist.tiles" extends="bbslist.tiles">
+		<put-attribute name="left_menu" value="/WEB-INF/views/cal/left_calmenu.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/cal/calendarlist.jsp"/>
+	</definition>
+	
+	<definition name="calDetail.tiles" extends="callist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/cal/calDetail.jsp"/>
+	</definition>
+	
+	
+	<definition name="calWrite.tiles" extends="callist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/cal/calWrite.jsp"/>
+	</definition>
+	
+	
+	<definition name="calUpdate.tiles" extends="callist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/cal/calUpdate.jsp"/>
+	</definition>
+	
+	
+	<definition name="calDayList.tiles" extends="callist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/cal/dayList.jsp"/>
+	</definition>
+	
+	
+	
+	<!-- calendar Plug -->
+	<definition name="calendarPlugList.tiles" extends="bbslist.tiles">
+		<put-attribute name="left_menu" value="/WEB-INF/views/calPlug/left_calmenu.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/calPlug/calendarPlugList.jsp"/>
+	</definition>
+	
+	
+	
+	<!-- Pds -->
+	<definition name="pdslist.tiles" extends="bbslist.tiles">
+		<put-attribute name="left_menu" value="/WEB-INF/views/pds/left_pdsmenu.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/pds/pdslist.jsp"/>
+	</definition>
+	
+	<definition name="pdsWrite.tiles" extends="pdslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/pds/pdsWrite.jsp"/>
+	</definition>
+	
+	<definition name="pdsDetail.tiles" extends="pdslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/pds/pdsDetail.jsp"/>
+	</definition>
+	
+	<definition name="pdsUpdate.tiles" extends="pdslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/pds/pdsUpdate.jsp"/>
+	</definition>
+	
+	
+	<!-- 투표 -->
+	<definition name="pollList.tiles" extends="bbslist.tiles">
+		<put-attribute name="left_menu" value="/WEB-INF/views/poll/left_pollmenu.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/poll/pollList.jsp"/>
+	</definition>
+	
+	<definition name="pollMake.tiles" extends="pollList.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/poll/pollMake.jsp"/>
+	</definition>
+	
+	<definition name="pollDetail.tiles" extends="pollList.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/poll/pollDetail.jsp"/>
+	</definition>
+	
+	
+	
+	
+
+</tiles-definitions>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+
+<mapper namespace="Pds">
+
+<select id="getPdsList" resultType="bit.com.a.dto.PdsDto">
+	SELECT SEQ, ID, TITLE, CONTENT, FILENAME, NEWFILENAME, READCOUNT, DOWNCOUNT, REGDATE
+	FROM PDS
+	ORDER BY SEQ DESC	
+</select>
+
+
+<insert id="uploadPds" parameterType="bit.com.a.dto.PdsDto">
+	INSERT INTO PDS(SEQ, ID, TITLE, CONTENT, FILENAME, NEWFILENAME, READCOUNT, DOWNCOUNT, REGDATE)
+	VALUES (SEQ_PDS.NEXTVAL, #{id}, #{title}, #{content}, #{filename}, #{newFilename}, 0, 0, SYSDATE)
+</insert>
+
+
+
+<!-- 오리지날 이름 가져오기 -->
+<select id="getFilename" parameterType="string" resultType="string">
+	SELECT FILENAME
+	FROM PDS
+	WHERE NEWFILENAME=#{newFilename}
+</select>
+
+
+<!-- 조회수 증가 -->
+<update id="readCount" parameterType="int">
+	UPDATE PDS
+	SET READCOUNT = READCOUNT + 1
+	WHERE SEQ=#{seq}
+</update>	
+
+<!-- 다운로드수 증가 -->
+<update id="downloadCount" parameterType="int">
+	UPDATE PDS
+	SET DOWNCOUNT = DOWNCOUNT + 1
+	WHERE SEQ=#{seq}
+</update>	
+
+
+<!-- 디테일 -->
+<select id="getDetail" parameterType="int" resultType="bit.com.a.dto.PdsDto">
+	SELECT SEQ, ID, TITLE, CONTENT, FILENAME, NEWFILENAME, READCOUNT, DOWNCOUNT, REGDATE
+	FROM PDS
+	WHERE SEQ=#{seq}
+</select>
+
+
+<!-- 삭제 -->
+<delete id="delete" parameterType="int">
+	DELETE FROM PDS
+	WHERE SEQ=#{seq}
+</delete>
+
+
+<!-- 글수정 -->
+<update id="update" parameterType="bit.com.a.dto.PdsDto">
+	UPDATE PDS 
+	SET TITLE=#{title}, CONTENT=#{content}
+	<if test="filename != null and filename != '' and newFilename != null and newFilename != '' ">	
+		, FILENAME=#{filename}, NEWFILENAME=#{newFilename}
+	</if>		
+	WHERE SEQ=#{seq}
+</update>
+
+
+
+</mapper>  

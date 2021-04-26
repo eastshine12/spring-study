@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="Bbs">
+
+
+
+<!-- 글 페이지 리스트 -->
+
+
+<select id="bbsPagingList" parameterType="bit.com.a.dto.BbsParam" resultType="bit.com.a.dto.BbsDto">
+	SELECT SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT
+	FROM
+		(SELECT ROW_NUMBER()OVER(ORDER BY REF DESC, STEP ASC) AS RNUM, 
+		SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT
+		FROM BBS 
+		WHERE DEL = 0 
+	<if test="choice != null and choice != '' 
+			and search != null and search != '' ">	
+		<choose>
+			<when test="choice == 'TITLE'">
+				AND TITLE LIKE '%'||#{search}||'%' 
+			</when>
+			<when test="choice == 'CONTENT'">
+				AND CONTENT LIKE '%'||#{search}||'%' 
+			</when>
+			<when test="choice == 'ID'">
+				AND ID LIKE '%'||#{search}||'%' 
+			</when>
+		</choose>
+	</if>		
+	 ORDER BY REF DESC, STEP ASC)
+	 WHERE RNUM&gt;=1+10*#{page} AND RNUM&lt;=10+10*#{page}
+</select>
+
+
+
+<!-- 글 전체 개수 -->
+<select id="allBbs" parameterType="bit.com.a.dto.BbsParam" resultType="int">
+	SELECT NVL(COUNT(*), 0)
+	FROM BBS
+	WHERE DEL = 0 
+	<if test="choice != null and choice != ''
+	  		and search != null and search != ''">	  	  		
+		  <if test="choice == 'TITLE'">
+		  		AND TITLE LIKE '%'||#{search}||'%'		  
+		  </if>
+		  <if test="choice == 'CONTENT'">
+		  		AND CONTENT LIKE '%'||#{search}||'%'			  
+		  </if>
+		  <if test="choice == 'ID'">
+		  		AND ID=#{search}  
+		  </if>	
+	  </if>
+</select>
+
+
+<!-- 글쓰기 -->
+<insert id="write" parameterType="bit.com.a.dto.BbsDto">
+	INSERT INTO BBS(SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT )
+	VALUES (SEQ_BBS.NEXTVAL,#{id},(SELECT NVL(MAX(REF),0)+1 FROM BBS),0,0,#{title},#{content},SYSDATE,0,0) 
+</insert>
+
+
+
+<!-- 디테일 페이지 -->
+
+
+<select id="detail" parameterType="int" resultType="bit.com.a.dto.BbsDto">
+	SELECT SEQ, ID, REF, STEP, DEPTH,
+	TITLE, CONTENT, WDATE,
+	DEL, READCOUNT 
+	FROM BBS 
+	WHERE SEQ=#{seq}
+</select>
+
+
+<!-- 글삭제 -->
+<update id="delete" parameterType="int">
+	UPDATE BBS
+	SET DEL=1
+	WHERE SEQ=#{seq}
+</update>
+
+
+<!-- 글수정 -->
+<update id="update" parameterType="bit.com.a.dto.BbsDto">
+	UPDATE BBS 
+	SET TITLE=#{title}, CONTENT=#{content} 
+	WHERE SEQ=#{seq}
+</update>
+
+
+<!-- 답글 -->
+<update id="answerUpdate" parameterType="int">
+	UPDATE BBS
+	SET STEP=STEP+1
+	WHERE REF=(SELECT REF FROM BBS WHERE SEQ=#{seq} ) AND STEP>(SELECT STEP FROM BBS WHERE SEQ=#{seq} )	
+</update>		
+		
+<insert id="answerInsert" parameterType="bit.com.a.dto.BbsDto">
+	INSERT INTO BBS(SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT)
+	VALUES(SEQ_BBS.NEXTVAL, #{id}, 
+	(SELECT REF FROM BBS WHERE SEQ=#{seq}), 
+	(SELECT STEP FROM BBS WHERE SEQ=#{seq}) + 1, 
+	(SELECT DEPTH FROM BBS WHERE SEQ=#{seq}) + 1, 
+	#{title}, #{content}, SYSDATE, 0, 0)  
+</insert>		
+
+
+</mapper>

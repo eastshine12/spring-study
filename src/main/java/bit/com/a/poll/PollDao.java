@@ -15,4 +15,8 @@ public interface PollDao {
 	PollDto getPoll(PollDto poll);
 	List<PollSubDto> getPollSubList(PollDto poll);
 	
+	void pollingVoter(Voter voter);
+	void pollingPoll(Voter voter);
+	void pollingSub(Voter voter);
+	
 }

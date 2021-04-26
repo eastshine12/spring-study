@@ -45,8 +45,21 @@ public class PollDaoImpl implements PollDao {
 	public List<PollSubDto> getPollSubList(PollDto poll) {
 		return session.selectList(ns+"getPollSubList", poll);
 	}
-	
-	
+
+	@Override
+	public void pollingVoter(Voter voter) {
+		session.insert(ns+"pollingVoter", voter);
+	}
+
+	@Override
+	public void pollingPoll(Voter voter) {
+		session.update(ns+"pollingPoll", voter);
+	}
+
+	@Override
+	public void pollingSub(Voter voter) {
+		session.update(ns+"pollingSub", voter);
+	}
 
 
 }

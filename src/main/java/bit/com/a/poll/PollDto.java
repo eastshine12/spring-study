@@ -43,13 +43,13 @@ REFERENCES MEMBER(ID);
 /* 투표 주제(질의) */
 public class PollDto implements Serializable {
 
-	private int pollId;			//	sequence 투표번호
+	private int pollId;			//	sequence 투표글 번호
 	private String id;			//	투표 만든 사람 ID
-	private String question;	//	투표 질문 제목
+	private String question;	//	투표 제목
 	private Date sDate;			//	투표 시작일
 	private Date eDate;			//	투표 종료일
 	private Date regDate;		// 	투표 만든 날
-	private int itemCount;		//	보기 수 -> 2~10개
+	private int itemCount;		//	보기 수 -> 2~20개
 	private int pollTotal;		//	해당 항목을 투표한 사람의 수
 	private boolean vote;		//	투표를 했는지 안했는지 체크
 	

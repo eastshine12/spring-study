@@ -1,7 +1,6 @@
 package bit.com.a.poll;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +19,15 @@ public class PollServiceImpl implements PollService {
 		//모든 투표 목록을 가지고 온다.
 		List<PollDto> list = dao.getPollAllList();
 		
-		//편집을 해서 투표가 가능한지 설정해서 넘겨줄 목록?
+		//투표 참여했는지 확인 후 넘겨줄 목록 (한번만 참여 가능해야 하므로)
 		List<PollDto> pList = new ArrayList<PollDto>();
 		
 		
+		/* Voter 테이블에 기록이 있다면 해당 투표에 참여한 것 */
 		for (PollDto poll : list) {
-			int pollId = poll.getPollId();	// 투표번호를 꺼낸다.
+			int pollId = poll.getPollId();	// 투표글 번호를 꺼낸다.
 			//투표했음 : 1, 투표안했음 : 2
-			int count = dao.isVote(new Voter(pollId, -1, id));
+			int count = dao.isVote(new Voter(pollId, 0, id));
 			if (count == 1) {
 				poll.setVote(true);
 			} else {
@@ -67,6 +67,17 @@ public class PollServiceImpl implements PollService {
 	public List<PollSubDto> getPollSubList(PollDto poll) {
 		return dao.getPollSubList(poll);
 	}
+
+
+	@Override
+	public void polling(Voter voter) {
+		
+		dao.pollingVoter(voter);
+		dao.pollingPoll(voter);
+		dao.pollingSub(voter);
+		
+	}
+	
 	
 	
 	

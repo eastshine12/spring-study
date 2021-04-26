@@ -62,6 +62,14 @@ public class PollController {
 	}
 	
 	
+	@RequestMapping(value = "polling.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String polling(Voter voter) {
+		service.polling(voter);
+		
+		return "redirect:/pollList.do";
+	}
+	
+	
 	
 	
 }

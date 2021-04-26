@@ -51,6 +51,26 @@
 </select>
 
 
+<!--  투표했을 때  -->
+<!-- 누가? -->
+<insert id="pollingVoter" parameterType="bit.com.a.poll.Voter">
+	INSERT INTO VOTER(VOTERID, POLLID, POLLSUBID, ID, REGDATE)
+	VALUES(VOTER_SEQ.NEXTVAL, #{pollId}, #{pollSubId}, #{id}, SYSDATE)
+</insert>
+<!-- 어느 투표에 -->
+<update id="pollingPoll" parameterType="bit.com.a.poll.Voter">
+	UPDATE POLL
+	SET POLLTOTAL=POLLTOTAL+1
+	WHERE POLLID=#{pollId}
+</update>
+<!-- 어느 보기를 -->
+<update id="pollingSub" parameterType="bit.com.a.poll.Voter">
+	UPDATE POLLSUB
+	SET ACOUNT=ACOUNT+1
+	WHERE POLLSUBID=#{pollSubId} AND POLLID=#{pollId}
+</update>
+
+
 
 
 </mapper>  

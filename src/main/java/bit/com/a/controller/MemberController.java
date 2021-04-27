@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import bit.com.a.annotation.NoLogging;
 import bit.com.a.dto.MemberDto;
 import bit.com.a.service.MemberService;
 
@@ -17,12 +18,14 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+	@NoLogging
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String login() {
 		
 		return "login.tiles";
 	}
 	
+	@NoLogging
 	@RequestMapping(value = "regi.do", method = RequestMethod.GET)
 	public String regi() {
 		
@@ -39,7 +42,7 @@ public class MemberController {
 		return s == null ? "YES" : "NO";
 	}	
 	
-	
+	@NoLogging
 	@RequestMapping(value = "regiAf.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String regiAf(MemberDto dto) {
 		
@@ -48,7 +51,7 @@ public class MemberController {
 		return i > 0 ? "login.tiles" : "regi.tiles";
 	}
 	
-	
+	@NoLogging
 	@RequestMapping(value = "loginAf.do", method = RequestMethod.POST)
 	public String loginAf(MemberDto dto, HttpServletRequest req) {
 		
@@ -76,5 +79,12 @@ public class MemberController {
 		return "redirect:/login.do";
 	}
 
+	
+	@RequestMapping(value = "sessionOut.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String sessionOut() {
+		return "sessionOut.tiles";
+	}
+	
+	
 
 }

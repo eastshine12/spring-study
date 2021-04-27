@@ -79,7 +79,4 @@ public class PollServiceImpl implements PollService {
 	}
 	
 	
-	
-	
-	
 }

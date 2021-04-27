@@ -9,6 +9,9 @@
 	</definition>
 	<definition name="regi.tiles" template="/WEB-INF/views/login/regi.jsp">
 	</definition>
+	<definition name="sessionOut.tiles" extends="bbslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/login/sessionOut.jsp"/>
+	</definition>
 	
 	
 	<!-- bbs -->
@@ -106,7 +109,15 @@
 		<put-attribute name="main" value="/WEB-INF/views/poll/pollDetail.jsp"/>
 	</definition>
 	
+	<definition name="pollResult.tiles" extends="pollList.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/poll/pollResult.jsp"/>
+	</definition>
 	
+	
+	<!-- 웹소켓 -->
+	<definition name="chating.tiles" extends="bbslist.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/websocket/chating.jsp"/>
+	</definition>
 	
 	
 

@@ -6,26 +6,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%
-request.setCharacterEncoding("utf-8");
-Object ologin = session.getAttribute("login");	//로그인 되어있는 유저 dto
-MemberDto mem = null;
-if(ologin == null) { 	//로그인이 안되어있으면
-	%>
-	<script>
-	
-	alert("로그인 해 주십시오");
-	location.href = "login.do";
-	
-	</script>
-	
-<%	
-}
-mem = (MemberDto)ologin;	//로그인이 되면 MemberDto에 유저dto 담기
-%>
-
-
 <jsp:useBean id="arw" class="util.Arrow"/>
 
 

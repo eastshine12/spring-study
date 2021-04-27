@@ -127,7 +127,7 @@ int tDay = cal.get(Calendar.DATE);
 <script>
 $(document).ready(function() {
 	
-	/* 보기 항목 초기화 */
+	/* 항목들 초기화 */
 	for(i = 5; i <= 20; i++) {
 		$('#poll'+i).hide();
 	}
@@ -155,10 +155,3 @@ function pollChange(sel) {
 
 
 </script>
-
-
-
-
-
-    
-    

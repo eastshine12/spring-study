@@ -11,6 +11,7 @@
 			<li><a href="calendarPlugList.do" title="일정관리2">일정관리2</a></li>
 			<li><a href="pdslist.do" title="자료실">자료실</a></li>
 			<li><a href="pollList.do" title="투표">투표</a></li>
+			<li><a href="chating.do" title="채팅">채팅</a></li>
 		</ul>
 	</div>
 </div>

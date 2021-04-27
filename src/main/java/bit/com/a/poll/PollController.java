@@ -69,7 +69,19 @@ public class PollController {
 		return "redirect:/pollList.do";
 	}
 	
-	
+	@RequestMapping(value = "pollResult.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String pollResult(PollDto poll, Model model) {
+		model.addAttribute("doc_title", "투표 결과");
+		
+		//PollTotal
+		PollDto dto = service.getPoll(poll);
+		//보기들
+		List<PollSubDto> list = service.getPollSubList(poll);
+		model.addAttribute("poll", dto);
+		model.addAttribute("pollSubList", list);
+		
+		return "pollResult.tiles";
+	}
 	
 	
 }

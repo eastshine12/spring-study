@@ -96,7 +96,7 @@ if(mem.getAuth() == 1) {
 				<%
 				if(isS || PollUtil.isEnd(poll.geteDate())) {
 				%>
-					<a href="pollResult.do?pollI<%=poll.getPollId() %>">결과</a>
+					<a href="pollResult.do?pollId=<%=poll.getPollId() %>">결과</a>
 				<%	
 				} else {
 				%>

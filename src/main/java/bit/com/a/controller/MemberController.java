@@ -33,6 +33,7 @@ public class MemberController {
 	}
 	
 	
+	@NoLogging
 	@ResponseBody	// Ajax 사용시에 반드시 붙여주는 어노테이션
 	@RequestMapping(value = "idcheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String idcheck(String id) {

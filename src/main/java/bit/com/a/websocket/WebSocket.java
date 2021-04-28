@@ -11,6 +11,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class WebSocket extends TextWebSocketHandler{
 	
+	
+	private Map<String, ConcurrentHashMap<String, WebSocketSession>> roomMap = new ConcurrentHashMap<String, ConcurrentHashMap<String, WebSocketSession>>();
 	private Map<String, WebSocketSession> userMap = new ConcurrentHashMap<String, WebSocketSession>();
 
 	public WebSocket() {

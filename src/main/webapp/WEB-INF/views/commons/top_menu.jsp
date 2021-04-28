@@ -12,6 +12,7 @@
 			<li><a href="pdslist.do" title="자료실">자료실</a></li>
 			<li><a href="pollList.do" title="투표">투표</a></li>
 			<li><a href="chating.do" title="채팅">채팅</a></li>
+			<li><a href="youtube.do" title="유튜브">유튜브</a></li>
 		</ul>
 	</div>
 </div>

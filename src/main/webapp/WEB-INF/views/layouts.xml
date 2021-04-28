@@ -120,6 +120,17 @@
 	</definition>
 	
 	
+	<!-- Youtube -->
+	<definition name="youtube.tiles" extends="bbslist.tiles">
+		<put-attribute name="left_menu" value="/WEB-INF/views/youtube/left_youtube.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/youtube/youtube.jsp"/>
+	</definition>
+	
+	<definition name="youtubeList.tiles" extends="youtube.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/youtube/youtubeList.jsp"/>
+	</definition>
+	
+	
 
 </tiles-definitions>
 
